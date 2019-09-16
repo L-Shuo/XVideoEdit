@@ -1,5 +1,6 @@
 #include "inc/mainwindow.h"
-#include "ui_mainwindow.h"
+#include "ui_XVideoEditUI.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

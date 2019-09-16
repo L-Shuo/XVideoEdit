@@ -25,19 +25,42 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        src/baseopenglwidget.cpp \
         src/main.cpp \
         src/mainwindow.cpp
 
 HEADERS += \
-    inc/mainwindow.h
+    inc/mainwindow.h \
+    inc/baseopenglwidget.h
 
 FORMS += \
-        ui/mainwindow.ui
+    ui/XVideoEditUI.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+LIBS += -L$$PWD/libs/opencv411 \
+-lopencv_calib3d411 \
+-lopencv_features2d411 \
+-lopencv_highgui411 \
+-lopencv_ml411 \
+-lopencv_stitching411 \
+-lopencv_core411 \
+-lopencv_flann411 \
+-lopencv_imgcodecs411 \
+-lopencv_objdetect411 \
+-lopencv_video411 \
+-lopencv_dnn411 \
+-lopencv_gapi411 \
+-lopencv_imgproc411 \
+-lopencv_photo411 \
+-lopencv_videoio411
+
 RESOURCES += \
     res/res.qrc
+
+INCLUDEPATH += $$PWD/inc/
+#DEPENDPATH += D:/workspace/opencv-4.1.1/build/install/include
+
