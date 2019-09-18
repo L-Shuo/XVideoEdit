@@ -5,18 +5,35 @@
 
 BaseOpenGLWidget::BaseOpenGLWidget(QWidget *parent) : QOpenGLWidget (parent)
 {
-    qDebug() << "BaseOpenGLWidget";
+    //qDebug() << "BaseOpenGLWidget";
 }
 
 void BaseOpenGLWidget::paintEvent(QPaintEvent *event)
 {
-    qDebug() << "PainterEvent";
-    Mat src = imread("1.jpg");
-    QImage img(src.data,src.cols,src.rows,QImage::Format_RGB888);//BGR
-    cvtColor(src,src,COLOR_BGR2RGB);
     QPainter painter;
     painter.begin(this);
     painter.drawImage(QPoint(0,0),img);
-    qDebug() << "MatView::paintEvent";
+    painter.end();
 }
 
+BaseOpenGLWidget::~BaseOpenGLWidget()
+{
+
+}
+
+
+void BaseOpenGLWidget::updateImage(cv::Mat image)
+{
+    if(img.isNull())
+    {
+        qDebug() << "create image";
+        uchar *buf = new uchar[width()*height()*3];
+        //QImage 4字节对齐，要求width与height是4的倍数
+        img = QImage(buf,width(),height(),QImage::Format_RGB888);
+    }
+    Mat _dst;
+    cv::resize(image,_dst,Size(img.width(),img.height()));
+    cv::cvtColor(_dst,_dst,cv::COLOR_BGR2RGB);
+    memcpy(img.bits(),_dst.data,_dst.cols*_dst.rows*_dst.elemSize());
+    update();
+}

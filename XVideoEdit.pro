@@ -27,11 +27,13 @@ CONFIG += c++11
 SOURCES += \
         src/baseopenglwidget.cpp \
         src/main.cpp \
-        src/mainwindow.cpp
+        src/mainwindow.cpp \
+        src/xvideothread.cpp
 
 HEADERS += \
     inc/mainwindow.h \
-    inc/baseopenglwidget.h
+    inc/baseopenglwidget.h \
+    inc/xvideothread.h
 
 FORMS += \
     ui/XVideoEditUI.ui
