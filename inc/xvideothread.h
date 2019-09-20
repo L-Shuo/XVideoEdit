@@ -23,6 +23,8 @@ public:
     }
     void run();
     bool open(QString filename);
+    double getPlayPos();
+
     ~XVideoThread();
 
 signals:
@@ -32,6 +34,7 @@ protected:
     XVideoThread();
     QMutex mutex;
     bool is_exit=false;
+    double srcFPS;
 };
 
 #endif // XVIDEOTHREAD_H

@@ -3,7 +3,7 @@
 
 XVideoThread::XVideoThread()
 {
-
+    start();
 }
 
 void XVideoThread::run()
@@ -30,19 +30,44 @@ void XVideoThread::run()
         }
         emit setImage(src);
         mutex.unlock();
-        msleep(40);
+        msleep(1000/srcFPS);
     }
 }
 
 bool XVideoThread::open(QString filename)
 {
     qDebug() << filename.toLocal8Bit().data();
+    if(srcVideo.isOpened())
+    {
+        srcVideo.release();
+    }
     if(!srcVideo.open(filename.toLocal8Bit().data()))
     {
         return false;
     }
-    start();
+    srcFPS = srcVideo.get(cv::CAP_PROP_FPS);
+    //qDebug() << FPS << 1000/FPS;
+    if(srcFPS <= 0)
+    {
+        srcFPS = 30;
+    }
     return true;
+}
+
+double XVideoThread::getPlayPos()
+{
+    mutex.lock();
+    if(srcVideo.isOpened())
+    {
+        double curPos = srcVideo.get(cv::CAP_PROP_POS_FRAMES);
+        double total_count = srcVideo.get(cv::CAP_PROP_FRAME_COUNT);
+        mutex.unlock();
+        //qDebug() << curPos << total_count;
+        if(total_count > 0.001)
+            return curPos/total_count;
+    }
+    mutex.unlock();
+    return 0;
 }
 
 XVideoThread::~XVideoThread()

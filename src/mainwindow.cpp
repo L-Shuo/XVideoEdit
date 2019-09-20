@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowFlag(Qt::FramelessWindowHint);
     qRegisterMetaType<cv::Mat>("cv::Mat");
     connect(XVideoThread::Instance(),SIGNAL(setImage(cv::Mat)),ui->src_widget,SLOT(updateImage(cv::Mat)));
+    startTimer(500);
 }
 
 MainWindow::~MainWindow()
@@ -33,4 +34,10 @@ void MainWindow::Open()
     {
         QMessageBox::information(this,"","open failed!" + filename);
     }
+}
+
+void MainWindow::timerEvent(QTimerEvent *event)
+{
+    //qDebug() << XVideoThread::Instance()->getPlayPos();
+    ui->srcSlider->setValue(XVideoThread::Instance()->getPlayPos()*1000);
 }
