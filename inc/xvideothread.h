@@ -24,11 +24,17 @@ public:
     void run();
     bool open(QString filename);
     double getPlayPos();
+    //外部设置帧位置的接口
+    void seek(int pos);
 
     ~XVideoThread();
 
 signals:
     void setImage(cv::Mat);
+
+private:
+    //帧位置移动内部实现
+    void seek(double pos);
 
 protected:
     XVideoThread();

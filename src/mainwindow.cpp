@@ -39,5 +39,24 @@ void MainWindow::Open()
 void MainWindow::timerEvent(QTimerEvent *event)
 {
     //qDebug() << XVideoThread::Instance()->getPlayPos();
-    ui->srcSlider->setValue(XVideoThread::Instance()->getPlayPos()*1000);
+    if(!sliderPause)
+        ui->srcSlider->setValue(XVideoThread::Instance()->getPlayPos()*1000);
+}
+
+void MainWindow::sliderMoved(int value)
+{
+    //qDebug() << value;
+    XVideoThread::Instance()->seek(value);
+}
+
+void MainWindow::sliderPressed()
+{
+    //qDebug() << "slider pressed";
+    sliderPause = true;
+}
+
+void MainWindow::sliderReleased()
+{
+    //qDebug() << "slider released";
+    sliderPause = false;
 }

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>801</width>
     <height>700</height>
    </rect>
   </property>
@@ -242,7 +242,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>801</width>
      <height>23</height>
     </rect>
    </property>
@@ -270,12 +270,12 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>782</x>
-     <y>96</y>
+     <x>789</x>
+     <y>49</y>
     </hint>
     <hint type="destinationlabel">
      <x>622</x>
-     <y>-5</y>
+     <y>0</y>
     </hint>
    </hints>
   </connection>
@@ -286,8 +286,8 @@
    <slot>Open()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>536</x>
-     <y>468</y>
+     <x>596</x>
+     <y>530</y>
     </hint>
     <hint type="destinationlabel">
      <x>542</x>
@@ -295,8 +295,59 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>srcSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>sliderMoved(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>266</x>
+     <y>355</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>295</x>
+     <y>47</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>srcSlider</sender>
+   <signal>sliderPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>sliderPressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>208</x>
+     <y>356</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>189</x>
+     <y>39</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>srcSlider</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>sliderReleased()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>137</x>
+     <y>358</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>72</x>
+     <y>45</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
+  <slot>sliderPressed()</slot>
+  <slot>sliderMoved(int)</slot>
+  <slot>sliderReleased()</slot>
  </slots>
 </ui>

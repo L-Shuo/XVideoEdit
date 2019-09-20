@@ -18,9 +18,13 @@ public:
 
 private slots:
     void Open();
+    void sliderMoved(int);
+    void sliderPressed();
+    void sliderReleased();
 
 private:
     Ui::MainWindow *ui;
+    bool sliderPause = false;
 };
 
 #endif // MAINWINDOW_H

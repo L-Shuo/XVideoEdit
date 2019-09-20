@@ -70,6 +70,25 @@ double XVideoThread::getPlayPos()
     return 0;
 }
 
+void XVideoThread::seek(int pos)
+{
+    double total_count = srcVideo.get(cv::CAP_PROP_FRAME_COUNT);
+    //qDebug() << curPos;
+    seek(pos/1000.0 * total_count);
+}
+
+void XVideoThread::seek(double pos)
+{
+    mutex.lock();
+    if(!srcVideo.isOpened())
+    {
+        mutex.unlock();
+        return;
+    }
+    srcVideo.set(cv::CAP_PROP_POS_FRAMES,pos);
+    mutex.unlock();
+}
+
 XVideoThread::~XVideoThread()
 {
     mutex.lock();
