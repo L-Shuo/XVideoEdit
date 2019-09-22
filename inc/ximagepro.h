@@ -15,7 +15,7 @@ public:
     //设置亮度与对比度
     void Gain(double bright, double contrast);
 
-    cv::Mat& Get()
+    cv::Mat Get()
     {
         return dst;
     }

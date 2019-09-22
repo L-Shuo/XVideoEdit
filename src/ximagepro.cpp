@@ -1,4 +1,5 @@
 #include "ximagepro.h"
+#include <QDebug>
 
 XImagePro::XImagePro()
 {
@@ -16,5 +17,6 @@ void XImagePro::Gain(double bright, double contrast)
 {
     if(dst.empty())
         return;
-    this->dst.convertTo(dst,-1,bright,contrast);
+    qDebug() << bright << contrast;
+    this->dst.convertTo(dst,-1,contrast,bright);
 }

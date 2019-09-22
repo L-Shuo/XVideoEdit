@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowFlag(Qt::FramelessWindowHint);
     qRegisterMetaType<cv::Mat>("cv::Mat");
     connect(XVideoThread::Instance(),SIGNAL(setImage(cv::Mat)),ui->src_widget,SLOT(updateImage(cv::Mat)));
+    connect(XVideoThread::Instance(),SIGNAL(setMatImage(cv::Mat)),ui->mat_widget,SLOT(updateImage(cv::Mat)));
     startTimer(500);
 }
 
@@ -64,7 +65,7 @@ void MainWindow::sliderReleased()
 
 void MainWindow::setFilter()
 {
-    if(ui->brightSpinBox->value() > 0 || ui->contrastSpinBox->value() > 1)
+    if(ui->brightSpinBox->value() > 0 && ui->contrastSpinBox->value() >= 1)
     {
         XVideoFilter::Instance()->Add(XTask{TASK_GAIN,{(double)ui->brightSpinBox->value(),ui->contrastSpinBox->value()}});
     }

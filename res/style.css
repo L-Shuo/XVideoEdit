@@ -710,7 +710,7 @@ QToolButton#transferButton:hover{
 /**********按钮**********/
 QPushButton{
                 border-radius: 2px;
-                border: 1px;
+                border: 2px;
                 width: 75px;
                 height: 25px;
 }
@@ -729,21 +729,21 @@ QPushButton:enabled:pressed{
         background: rgb(80, 80, 80);
 }
 
-QPushButton#blueButton {
+QPushButton#openButton {
         color: white;
 }
-QPushButton#blueButton:enabled {
+QPushButton#openButton:enabled {
         background: rgb(0, 165, 235);
         color: white;
 }
-QPushButton#blueButton:!enabled {
+QPushButton#openButton:!enabled {
         background: gray;
         color: rgb(200, 200, 200);
 }
-QPushButton#blueButton:enabled:hover {
+QPushButton#openButton:enabled:hover {
         background: rgb(0, 180, 255);
 }
-QPushButton#blueButton:enabled:pressed {
+QPushButton#openButton:enabled:pressed {
         background: rgb(0, 140, 215);
 }
 
@@ -917,18 +917,6 @@ QPushButton#transferButton[iconProperty="left"] {
 }
 QPushButton#transferButton[iconProperty="right"] {
                 qproperty-icon: url(:/Black/right);
-}
-
-QPushButton#openButton {
-                border-radius: none;
-                image: url(:/Black/open);
-                background: transparent;
-}
-QPushButton#openButton:hover {
-                image: url(:/Black/openHover);
-}
-QPushButton#openButton:pressed {
-                image: url(:/Black/openPressed);
 }
 
 QPushButton#deleteButton {

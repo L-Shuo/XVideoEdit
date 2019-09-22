@@ -13,6 +13,7 @@ public:
 
     void Add(XTask task)
     {
+        tasks.clear();
         mutex.lock();
         tasks.push_back(task);
         mutex.unlock();
@@ -23,8 +24,6 @@ public:
         tasks.clear();
         mutex.unlock();
     }
-
-
 
 private:
     QMutex mutex;
@@ -43,7 +42,7 @@ cv::Mat CXFilter::Filter(cv::Mat mat1, cv::Mat mat2)
         case TASK_NONE:
             break;
         case TASK_GAIN: //亮度对比度调整
-            qDebug() << "Task Gain";
+            //qDebug() << "Task Gain";
             p.Gain(task.params[0],task.params[1]);
             break;
         }

@@ -1,4 +1,5 @@
 #include "xvideothread.h"
+#include "xvideofilter.h"
 #include <QDebug>
 
 XVideoThread::XVideoThread()
@@ -29,6 +30,8 @@ void XVideoThread::run()
             continue;
         }
         emit setImage(src);
+        cv::Mat mat = XVideoFilter::Instance()->Filter(src,/*ununsed*/cv::Mat());
+        emit setMatImage(mat);
         mutex.unlock();
         msleep(1000/srcFPS);
     }

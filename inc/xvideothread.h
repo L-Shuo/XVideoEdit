@@ -31,6 +31,7 @@ public:
 
 signals:
     void setImage(cv::Mat);
+    void setMatImage(cv::Mat);
 
 private:
     //帧位置移动内部实现
