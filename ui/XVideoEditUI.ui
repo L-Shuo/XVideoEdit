@@ -148,6 +148,41 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="0">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="brightLabel">
+          <property name="text">
+           <string>亮度(0-100)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="brightSpinBox"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="contrastSpinBox">
+          <property name="maximum">
+           <double>3.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="contrastLabel">
+          <property name="text">
+           <string>对比度(1.0-3.0)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="setButton">
+          <property name="text">
+           <string>设置</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="pushButton_2">
         <property name="text">
@@ -287,7 +322,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>596</x>
-     <y>530</y>
+     <y>401</y>
     </hint>
     <hint type="destinationlabel">
      <x>542</x>
@@ -343,11 +378,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>setButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>setFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>469</x>
+     <y>598</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>458</x>
+     <y>568</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
   <slot>sliderPressed()</slot>
   <slot>sliderMoved(int)</slot>
   <slot>sliderReleased()</slot>
+  <slot>setFilter()</slot>
  </slots>
 </ui>

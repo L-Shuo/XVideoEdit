@@ -1,6 +1,7 @@
-#include "inc/mainwindow.h"
+#include "mainwindow.h"
 #include "ui_XVideoEditUI.h"
 #include "xvideothread.h"
+#include "xvideofilter.h"
 #include <QDebug>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -59,4 +60,12 @@ void MainWindow::sliderReleased()
 {
     //qDebug() << "slider released";
     sliderPause = false;
+}
+
+void MainWindow::setFilter()
+{
+    if(ui->brightSpinBox->value() > 0 || ui->contrastSpinBox->value() > 1)
+    {
+        XVideoFilter::Instance()->Add(XTask{TASK_GAIN,{(double)ui->brightSpinBox->value(),ui->contrastSpinBox->value()}});
+    }
 }

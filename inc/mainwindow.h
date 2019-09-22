@@ -21,6 +21,7 @@ private slots:
     void sliderMoved(int);
     void sliderPressed();
     void sliderReleased();
+    void setFilter();
 
 private:
     Ui::MainWindow *ui;

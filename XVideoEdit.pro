@@ -28,12 +28,16 @@ SOURCES += \
         src/baseopenglwidget.cpp \
         src/main.cpp \
         src/mainwindow.cpp \
+        src/ximagepro.cpp \
+        src/xvideofilter.cpp \
         src/xvideothread.cpp
 
 HEADERS += \
     inc/mainwindow.h \
     inc/baseopenglwidget.h \
-    inc/xvideothread.h
+    inc/xvideothread.h \
+    inc/ximagepro.h \
+    inc/xvideofilter.h
 
 FORMS += \
     ui/XVideoEditUI.ui
