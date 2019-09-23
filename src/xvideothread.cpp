@@ -100,3 +100,14 @@ XVideoThread::~XVideoThread()
     wait();
     deleteLater();
 }
+
+bool XVideoThread::startSave(QString filename,int width, int height)
+{
+    qDebug() << "start saving";
+    return true;
+}
+
+void XVideoThread::stopSave()
+{
+    qDebug() << "stop saving";
+}

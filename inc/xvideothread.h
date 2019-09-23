@@ -24,8 +24,14 @@ public:
     void run();
     bool open(QString filename);
     double getPlayPos();
+
     //外部设置帧位置的接口
     void seek(int pos);
+
+    //开始保存视频
+    bool startSave(QString filename,int width, int height);
+    //停止保存视频,写入视频帧的索引
+    void stopSave();
 
     ~XVideoThread();
 
@@ -41,6 +47,7 @@ protected:
     XVideoThread();
     QMutex mutex;
     bool is_exit=false;
+    bool start_write = false;
     double srcFPS;
 };
 

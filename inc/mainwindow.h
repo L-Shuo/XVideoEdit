@@ -22,10 +22,12 @@ private slots:
     void sliderPressed();
     void sliderReleased();
     void setFilter();
+    void exportVideo(); //导出视频
 
 private:
     Ui::MainWindow *ui;
     bool sliderPause = false;
+    bool isExporting = false;
 };
 
 #endif // MAINWINDOW_H

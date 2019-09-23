@@ -729,7 +729,7 @@ QPushButton:enabled:pressed{
         background: rgb(80, 80, 80);
 }
 
-QPushButton#openButton {
+/*QPushButton#openButton {
         color: white;
 }
 QPushButton#openButton:enabled {
@@ -745,7 +745,7 @@ QPushButton#openButton:enabled:hover {
 }
 QPushButton#openButton:enabled:pressed {
         background: rgb(0, 140, 215);
-}
+}*/
 
 QPushButton#selectButton {
         border: none;

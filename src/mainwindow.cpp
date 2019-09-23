@@ -71,3 +71,22 @@ void MainWindow::setFilter()
         XVideoFilter::Instance()->Add(XTask{TASK_GAIN,{(double)ui->brightSpinBox->value(),ui->contrastSpinBox->value()}});
     }
 }
+
+void MainWindow::exportVideo()
+{
+    if(isExporting)
+    {
+        isExporting = false;
+        XVideoThread::Instance()->stopSave();
+        ui->exportButton->setText(tr("开始导出"));
+        return;
+    }
+    QString name = QFileDialog::getSaveFileName(this,"save","out1.avi");
+    if(name.isEmpty())
+        return;
+    if(XVideoThread::Instance()->startSave(name,0,0))
+    {
+        isExporting = true;
+        ui->exportButton->setText(tr("停止导出"));
+    }
+}
