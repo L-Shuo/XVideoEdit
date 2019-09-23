@@ -13,7 +13,6 @@ public:
 
     void Add(XTask task)
     {
-        tasks.clear();
         mutex.lock();
         tasks.push_back(task);
         mutex.unlock();

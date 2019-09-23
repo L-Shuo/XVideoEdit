@@ -17,6 +17,6 @@ void XImagePro::Gain(double bright, double contrast)
 {
     if(dst.empty())
         return;
-    qDebug() << bright << contrast;
+    //qDebug() << bright << contrast;
     this->dst.convertTo(dst,-1,contrast,bright);
 }

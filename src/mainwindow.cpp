@@ -65,7 +65,8 @@ void MainWindow::sliderReleased()
 
 void MainWindow::setFilter()
 {
-    if(ui->brightSpinBox->value() > 0 && ui->contrastSpinBox->value() >= 1)
+    XVideoFilter::Instance()->Clear();
+    if(ui->brightSpinBox->value() >= 0 && ui->contrastSpinBox->value() >= 1)
     {
         XVideoFilter::Instance()->Add(XTask{TASK_GAIN,{(double)ui->brightSpinBox->value(),ui->contrastSpinBox->value()}});
     }
