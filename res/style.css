@@ -747,7 +747,7 @@ QPushButton#openButton:enabled:pressed {
         background: rgb(0, 140, 215);
 }*/
 
-QPushButton#selectButton {
+/*QPushButton#selectButton {
         border: none;
         border-radius: none;
         border-left: 1px solid rgb(100, 100, 100);
@@ -777,7 +777,7 @@ QPushButton#linkButton:pressed {
 
 QPushButton#transparentButton {
         background: transparent;
-}
+}*/
 
 /*****************标题栏按钮*******************/
 QPushButton#minimizeButton {
@@ -954,4 +954,3 @@ QPushButton#minBtn {
     border-radius: none;
     border: 1px solid rgb(100, 100, 100);
 }
-

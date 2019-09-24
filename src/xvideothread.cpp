@@ -25,6 +25,12 @@ void XVideoThread::run()
             msleep(5);
             continue;
         }
+        if(!_play) //暂停
+        {
+            mutex.unlock();
+            msleep(5);
+            continue;
+        }
         if(!srcVideo.read(src) || src.empty())
         {
             if(this->start_write)
@@ -33,7 +39,9 @@ void XVideoThread::run()
                 emit exportStopped();
                 vw.release();
             }
+            emit startPlay(!_play);//更新播放按钮
             mutex.unlock();
+            msleep(100);
             continue;
         }
         if(!this->start_write)
@@ -69,6 +77,8 @@ bool XVideoThread::open(QString filename)
     {
         srcFPS = 30;
     }
+     _play = true;
+     emit startPlay(_play);//更新播放按钮
     return true;
 }
 
@@ -148,4 +158,11 @@ void XVideoThread::stopSave()
     vw.release();
     this->start_write = false;
     mutex.unlock();
+}
+
+void XVideoThread::play(bool play_pause)
+{
+    qDebug() << play_pause;
+    emit startPlay(play_pause);//更新播放按钮
+    _play = play_pause;
 }

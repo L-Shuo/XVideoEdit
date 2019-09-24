@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(XVideoThread::Instance(),SIGNAL(setImage(cv::Mat)),ui->src_widget,SLOT(updateImage(cv::Mat)));
     connect(XVideoThread::Instance(),SIGNAL(setMatImage(cv::Mat)),ui->mat_widget,SLOT(updateImage(cv::Mat)));
     connect(XVideoThread::Instance(),SIGNAL(exportStopped()),this,SLOT(exportStopped()));
+    connect(XVideoThread::Instance(),SIGNAL(startPlay(bool)),ui->src_widget,SLOT(pause_play(bool)));
+    connect(ui->src_widget,SIGNAL(play_pause(bool)),XVideoThread::Instance(),SLOT(play(bool)));
     startTimer(500);
 }
 

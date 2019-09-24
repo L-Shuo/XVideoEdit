@@ -40,6 +40,10 @@ signals:
     void setImage(cv::Mat);
     void setMatImage(cv::Mat);
     void exportStopped();
+    void startPlay(bool);
+
+protected slots:
+    void play(bool);
 
 private:
     //帧位置移动内部实现
@@ -52,6 +56,7 @@ protected:
     bool start_write = false;
     double srcFPS;
     int sleep_ms = 1;
+    bool _play;
 };
 
 #endif // XVIDEOTHREAD_H
