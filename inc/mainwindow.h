@@ -23,6 +23,7 @@ private slots:
     void sliderReleased();
     void setFilter();
     void exportVideo(); //导出视频
+    void exportStopped();
 
 private:
     Ui::MainWindow *ui;

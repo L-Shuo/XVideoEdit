@@ -10,6 +10,7 @@
 #include <opencv2/core.hpp>
 
 static cv::VideoCapture srcVideo;
+static cv::VideoWriter vw;
 
 class XVideoThread : public QThread
 {
@@ -38,6 +39,7 @@ public:
 signals:
     void setImage(cv::Mat);
     void setMatImage(cv::Mat);
+    void exportStopped();
 
 private:
     //帧位置移动内部实现
@@ -49,6 +51,7 @@ protected:
     bool is_exit=false;
     bool start_write = false;
     double srcFPS;
+    int sleep_ms = 1;
 };
 
 #endif // XVIDEOTHREAD_H

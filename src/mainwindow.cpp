@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qRegisterMetaType<cv::Mat>("cv::Mat");
     connect(XVideoThread::Instance(),SIGNAL(setImage(cv::Mat)),ui->src_widget,SLOT(updateImage(cv::Mat)));
     connect(XVideoThread::Instance(),SIGNAL(setMatImage(cv::Mat)),ui->mat_widget,SLOT(updateImage(cv::Mat)));
+    connect(XVideoThread::Instance(),SIGNAL(exportStopped()),this,SLOT(exportStopped()));
     startTimer(500);
 }
 
@@ -89,4 +90,11 @@ void MainWindow::exportVideo()
         isExporting = true;
         ui->exportButton->setText(tr("停止导出"));
     }
+}
+
+void MainWindow::exportStopped()
+{
+    isExporting = false;
+    //XVideoThread::Instance()->stopSave();
+    ui->exportButton->setText(tr("开始导出"));
 }

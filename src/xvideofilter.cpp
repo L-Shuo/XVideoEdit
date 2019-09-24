@@ -10,7 +10,10 @@ class CXFilter : public XVideoFilter
 {
 public:
     cv::Mat Filter(cv::Mat mat1, cv::Mat mat2);
+    ~CXFilter()
+    {
 
+    }
     void Add(XTask task)
     {
         mutex.lock();

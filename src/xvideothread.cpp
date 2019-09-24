@@ -10,6 +10,7 @@ XVideoThread::XVideoThread()
 void XVideoThread::run()
 {
     cv::Mat src;
+
     for(;;)
     {
         mutex.lock();
@@ -26,14 +27,27 @@ void XVideoThread::run()
         }
         if(!srcVideo.read(src) || src.empty())
         {
+            if(this->start_write)
+            {
+                this->start_write = false;
+                emit exportStopped();
+                vw.release();
+            }
             mutex.unlock();
             continue;
         }
-        emit setImage(src);
+        if(!this->start_write)
+            emit setImage(src);
         cv::Mat mat = XVideoFilter::Instance()->Filter(src,/*ununsed*/cv::Mat());
-        emit setMatImage(mat);
+        if(!this->start_write)
+            emit setMatImage(mat);
+        if(vw.isOpened() && this->start_write)
+        {
+            sleep_ms = 1; //加快导出速度
+            vw.write(mat);
+        }
         mutex.unlock();
-        msleep(1000/srcFPS);
+        msleep(sleep_ms);
     }
 }
 
@@ -49,6 +63,7 @@ bool XVideoThread::open(QString filename)
         return false;
     }
     srcFPS = srcVideo.get(cv::CAP_PROP_FPS);
+    sleep_ms = 1000/srcFPS;
     //qDebug() << FPS << 1000/FPS;
     if(srcFPS <= 0)
     {
@@ -104,10 +119,33 @@ XVideoThread::~XVideoThread()
 bool XVideoThread::startSave(QString filename,int width, int height)
 {
     qDebug() << "start saving";
+    int _width = width;
+    int _height = height;
+    mutex.lock();
+    if(!srcVideo.isOpened())
+    {
+        mutex.unlock();
+        return false;
+    }
+    if(width == 0)
+        _width = srcVideo.get(cv::CAP_PROP_FRAME_WIDTH);
+    if(height == 0)
+        _height = srcVideo.get(cv::CAP_PROP_FRAME_HEIGHT);
+    if(vw.open(filename.toLocal8Bit().data(),vw.fourcc('H', '2', '6', '4'),srcFPS,cv::Size(_width,_height)))
+    {
+        srcVideo.set(cv::CAP_PROP_POS_FRAMES,0);//回到第一帧,开始导出
+        this->start_write = true;
+    }
+    mutex.unlock();
     return true;
 }
 
 void XVideoThread::stopSave()
 {
     qDebug() << "stop saving";
+    mutex.lock();
+    sleep_ms = 1000/srcFPS;
+    vw.release();
+    this->start_write = false;
+    mutex.unlock();
 }
