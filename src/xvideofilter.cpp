@@ -10,6 +10,7 @@ public:
     cv::Mat Filter(cv::Mat mat1, cv::Mat mat2);
     ~CXFilter()
     {
+        Clear();
         qDebug() << "~CXFilter";
     }
     void Add(XTask task)

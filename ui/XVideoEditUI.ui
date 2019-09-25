@@ -225,6 +225,11 @@
          <widget class="QComboBox" name="flipBox">
           <item>
            <property name="text">
+            <string>无</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
             <string>X轴</string>
            </property>
           </item>

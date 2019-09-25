@@ -76,7 +76,7 @@ void BaseOpenGLWidget::paintEvent(QPaintEvent *event)
 
 BaseOpenGLWidget::~BaseOpenGLWidget()
 {
-
+    qDebug() << "~BaseOpenGLWidget";
 }
 
 void BaseOpenGLWidget::mouseMoveEvent(QMouseEvent *event)

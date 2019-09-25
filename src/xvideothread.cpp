@@ -124,6 +124,7 @@ XVideoThread::~XVideoThread()
     mutex.unlock();
     wait();
     deleteLater();
+    qDebug() << "~XVideoThread";
 }
 
 bool XVideoThread::startSave(QString filename,int width, int height)

@@ -46,7 +46,14 @@ void XImagePro::Filp(int direction)
 {
     if(dst.empty())
         return;
+    if(direction == 0)
+        return;
+    if(direction == 1)
+        direction = 0; //X轴
     if(direction == 2)
-        direction = -1;
+        direction = 1; //Y轴
+    if(direction == 3)
+        direction = -1; //XY轴
+
     cv::flip(dst,dst,direction);
 }
