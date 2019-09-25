@@ -507,8 +507,8 @@
    <slot>setFilter()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>484</x>
-     <y>483</y>
+     <x>555</x>
+     <y>535</y>
     </hint>
     <hint type="destinationlabel">
      <x>458</x>
@@ -529,6 +529,22 @@
     <hint type="destinationlabel">
      <x>631</x>
      <y>533</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>minBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showMinimized()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>748</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>662</x>
+     <y>35</y>
     </hint>
    </hints>
   </connection>
