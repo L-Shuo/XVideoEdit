@@ -4,15 +4,13 @@
 #include "xvideofilter.h"
 #include "ximagepro.h"
 
-class CXFilter;
-
 class CXFilter : public XVideoFilter
 {
 public:
     cv::Mat Filter(cv::Mat mat1, cv::Mat mat2);
     ~CXFilter()
     {
-
+        qDebug() << "~CXFilter";
     }
     void Add(XTask task)
     {
@@ -69,7 +67,7 @@ XVideoFilter::XVideoFilter()
 
 XVideoFilter::~XVideoFilter()
 {
-
+    qDebug() << "~XVideoFilter";
 }
 
 XVideoFilter *XVideoFilter::Instance()
