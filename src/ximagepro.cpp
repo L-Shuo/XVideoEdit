@@ -40,5 +40,13 @@ void XImagePro::Rotate(int direction)
     default:
         break;
     }
+}
 
+void XImagePro::Filp(int direction)
+{
+    if(dst.empty())
+        return;
+    if(direction == 2)
+        direction = -1;
+    cv::flip(dst,dst,direction);
 }

@@ -9,6 +9,7 @@
 enum XTastType {
     TASK_GAIN,
     TASK_ROTATE,
+    TASK_FLIP,
     TASK_NONE
 };
 

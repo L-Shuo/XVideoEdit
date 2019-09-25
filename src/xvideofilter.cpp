@@ -50,6 +50,9 @@ cv::Mat CXFilter::Filter(cv::Mat mat1, cv::Mat mat2)
         case TASK_ROTATE:
             p.Rotate((int)task.params[0]);
             break;
+        case TASK_FLIP:
+            p.Filp((int)task.params[0]);
+            break;
         }
     }
     cv::Mat ret = p.Get();

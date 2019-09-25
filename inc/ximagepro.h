@@ -18,6 +18,10 @@ public:
     //图像旋转
     void Rotate(int rotate = 0);
 
+    //图像镜像
+    //0:X轴,1:Y轴,-1:Both
+    void Filp(int direction);
+
     cv::Mat Get()
     {
         return dst;
