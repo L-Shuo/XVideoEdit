@@ -57,3 +57,10 @@ void XImagePro::Filp(int direction)
 
     cv::flip(dst,dst,direction);
 }
+
+void XImagePro::Resize(int x, int y)
+{
+    if(dst.empty())
+        return;
+    cv::resize(dst,dst,cv::Size(x,y));
+}

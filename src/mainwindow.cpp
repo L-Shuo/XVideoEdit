@@ -12,12 +12,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlag(Qt::FramelessWindowHint);
+
     qRegisterMetaType<cv::Mat>("cv::Mat");
     connect(XVideoThread::Instance(),SIGNAL(setImage(cv::Mat)),ui->src_widget,SLOT(updateImage(cv::Mat)));
     connect(XVideoThread::Instance(),SIGNAL(setMatImage(cv::Mat)),ui->mat_widget,SLOT(updateImage(cv::Mat)));
     connect(XVideoThread::Instance(),SIGNAL(exportStopped()),this,SLOT(exportStopped()));
     connect(XVideoThread::Instance(),SIGNAL(startPlay(bool)),ui->src_widget,SLOT(pause_play(bool)));
     connect(ui->src_widget,SIGNAL(play_pause(bool)),XVideoThread::Instance(),SLOT(play(bool)));
+    ui->resize_widthEdit->setValidator(new QIntValidator(50,3000,this));
+    ui->resize_heightEdit->setValidator(new QIntValidator(50,3000,this));
     startTimer(500);
 }
 
@@ -76,6 +79,13 @@ void MainWindow::setFilter() //设置按钮触发
     }
     XVideoFilter::Instance()->Add(XTask{TASK_ROTATE,{(double)ui->rotateBox->currentIndex()}});
     XVideoFilter::Instance()->Add(XTask{TASK_FLIP,{(double)ui->flipBox->currentIndex()}});
+    if(ui->resize_widthEdit->text().toDouble() >0 && ui->resize_heightEdit->text().toDouble()>0)
+    {
+        XVideoFilter::Instance()->Add(XTask{TASK_RESIZE,
+                                            {ui->resize_widthEdit->text().toDouble(),
+                                            ui->resize_heightEdit->text().toDouble()}});
+    }
+
 }
 
 void MainWindow::exportVideo()
@@ -90,7 +100,9 @@ void MainWindow::exportVideo()
     QString name = QFileDialog::getSaveFileName(this,"save","out1.avi");
     if(name.isEmpty())
         return;
-    if(XVideoThread::Instance()->startSave(name,0,0))
+    int __width = ui->resize_widthEdit->text().toInt();
+    int __height = ui->resize_heightEdit->text().toInt();
+    if(XVideoThread::Instance()->startSave(name,__width,__height)); //注意这里要传递宽高，否则导出的尺寸不对将无法播放
     {
         isExporting = true;
         ui->exportButton->setText(tr("停止导出"));

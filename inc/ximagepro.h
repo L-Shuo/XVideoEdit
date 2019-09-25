@@ -22,6 +22,9 @@ public:
     //0:X轴,1:Y轴,-1:Both
     void Filp(int direction);
 
+    //调整图像尺寸
+    void Resize(int x,int y);
+
     cv::Mat Get()
     {
         return dst;
