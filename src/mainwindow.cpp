@@ -66,13 +66,14 @@ void MainWindow::sliderReleased()
     sliderPause = false;
 }
 
-void MainWindow::setFilter()
+void MainWindow::setFilter() //设置按钮触发
 {
     XVideoFilter::Instance()->Clear();
     if(ui->brightSpinBox->value() >= 0 && ui->contrastSpinBox->value() >= 1)
     {
         XVideoFilter::Instance()->Add(XTask{TASK_GAIN,{(double)ui->brightSpinBox->value(),ui->contrastSpinBox->value()}});
     }
+    XVideoFilter::Instance()->Add(XTask{TASK_ROTATE,{(double)ui->rotateBox->currentIndex()}});
 }
 
 void MainWindow::exportVideo()

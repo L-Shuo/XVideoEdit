@@ -47,6 +47,9 @@ cv::Mat CXFilter::Filter(cv::Mat mat1, cv::Mat mat2)
             //qDebug() << "Task Gain";
             p.Gain(task.params[0],task.params[1]);
             break;
+        case TASK_ROTATE:
+            p.Rotate((int)task.params[0]);
+            break;
         }
     }
     cv::Mat ret = p.Get();

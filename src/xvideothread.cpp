@@ -155,8 +155,8 @@ void XVideoThread::stopSave()
     qDebug() << "stop saving";
     mutex.lock();
     sleep_ms = 1000/srcFPS;
-    vw.release();
     this->start_write = false;
+    vw.release();
     mutex.unlock();
 }
 

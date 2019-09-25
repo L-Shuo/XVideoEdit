@@ -387,22 +387,9 @@ QComboBox:enabled:hover, QComboBox:enabled:focus {
         color: rgb(230, 230, 230);
         background: rgb(68, 69, 73);
 }
-QComboBox::drop-down {
-        width: 20px;
-        border: none;
-        background: transparent;
-}
-QComboBox::drop-down:hover {
-        background: rgba(255, 255, 255, 30);
-}
-QComboBox::down-arrow {
-        image: url(:/Black/arrowBottom);
-}
-QComboBox::down-arrow:on {
-        /**top: 1px;**/
-}
+
 QComboBox QAbstractItemView {
-        border: 1px solid rgb(100, 100, 100);
+        /*border: 1px solid rgb(100, 100, 100);*/
         background: rgb(68, 69, 73);
         outline: none;
 }

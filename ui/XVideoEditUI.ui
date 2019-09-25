@@ -100,9 +100,6 @@
       </item>
       <item row="1" column="0">
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="1">
-         <widget class="QSpinBox" name="brightSpinBox"/>
-        </item>
         <item row="1" column="1">
          <widget class="QDoubleSpinBox" name="contrastSpinBox">
           <property name="minimum">
@@ -113,34 +110,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="contrastLabel">
-          <property name="styleSheet">
-           <string notr="true">color:rgb(198, 243, 255)</string>
-          </property>
-          <property name="text">
-           <string>对比度</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="setButton">
-          <property name="text">
-           <string>设置</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="brightLabel">
-          <property name="styleSheet">
-           <string notr="true">color:rgb(198, 243, 255)</string>
-          </property>
-          <property name="text">
-           <string>亮度(0-100)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
+        <item row="5" column="0">
          <spacer name="verticalSpacer_2">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -152,6 +122,89 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="brightSpinBox"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="brightLabel">
+          <property name="font">
+           <font>
+            <family>微软雅黑</family>
+            <pointsize>9</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+            <stylestrategy>PreferDefault</stylestrategy>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(198, 243, 255)</string>
+          </property>
+          <property name="text">
+           <string>亮度(0-100)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="contrastLabel">
+          <property name="font">
+           <font>
+            <family>微软雅黑</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(198, 243, 255)</string>
+          </property>
+          <property name="text">
+           <string>对比度</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="rotateBox">
+          <item>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>90</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>180</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>270</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label">
+          <property name="font">
+           <font>
+            <family>微软雅黑</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(198, 243, 255)</string>
+          </property>
+          <property name="text">
+           <string>旋转</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="setButton">
+          <property name="text">
+           <string>设置</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

@@ -15,6 +15,9 @@ public:
     //设置亮度与对比度
     void Gain(double bright, double contrast);
 
+    //图像旋转
+    void Rotate(int rotate = 0);
+
     cv::Mat Get()
     {
         return dst;
