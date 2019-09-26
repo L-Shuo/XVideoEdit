@@ -115,3 +115,34 @@ void MainWindow::exportStopped()
     //XVideoThread::Instance()->stopSave();
     ui->exportButton->setText(tr("开始导出"));
 }
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        _dragging = true;
+        _startPosition = event->globalPos();
+        _framePosition = frameGeometry().topLeft();
+    }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    if(event->buttons() & Qt::LeftButton)
+    {
+        if(_dragging)
+        {
+            //相对偏移量
+            QPoint delta = event->globalPos() - _startPosition;
+            //新位置：窗体原始位置+偏移量
+            move(_framePosition + delta);
+        }
+    }
+    QWidget::mouseMoveEvent(event);
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+    _dragging = false;
+    QWidget::mouseReleaseEvent(event);
+}

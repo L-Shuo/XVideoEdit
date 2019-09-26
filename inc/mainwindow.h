@@ -15,6 +15,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void timerEvent(QTimerEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
 
 private slots:
     void Open();
@@ -29,6 +32,9 @@ private:
     Ui::MainWindow *ui;
     bool sliderPause = false;
     bool isExporting = false;
+    bool _dragging = false;
+    QPoint _startPosition;
+    QPoint _framePosition;
 };
 
 #endif // MAINWINDOW_H
