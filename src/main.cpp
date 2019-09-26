@@ -38,20 +38,6 @@ static int ToWchar(const char* &src, wchar_t* &dest, const char *locale = "zh_CN
 
 int main(int argc, char *argv[])
 {
-
-#if 0 //字体调用显示示例
-    cv::Mat image = cv::imread("F:\\Code\\XVideoEdit\\XVideoEdit\\1.png");
-    CvxText text("F:\\Code\\XVideoEdit\\XVideoEdit\\res\\simhei.ttf");
-    QString my_msg("123:你好,avdssdww");
-    const char *msg = my_msg.toLocal8Bit().data();
-    float p = 0.5;
-    cv::Scalar size1{ 30, 0.1, 0.1, 0 };
-    text.setFont(NULL, &size1, NULL, &p);  //透明处理
-    text.putText(image, msg, cv::Point(50, 50), CV_RGB(255,255,255));
-    cv::Mat mat(image);
-    imwrite( "pro.png", mat );
-#endif
-
     QApplication a(argc, argv);
     QFile qss(":/style/style.css");
     qss.open(QFile::ReadOnly);

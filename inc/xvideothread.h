@@ -8,9 +8,11 @@
 #include <opencv2/video.hpp>
 #include <opencv2/videoio.hpp>
 #include <opencv2/core.hpp>
+#include "CvxText.h"
 
 static cv::VideoCapture srcVideo;
 static cv::VideoWriter vw;
+static CvxText CV_TEXT("F:\\Code\\XVideoEdit\\XVideoEdit\\res\\simhei.ttf");
 
 class XVideoThread : public QThread
 {
