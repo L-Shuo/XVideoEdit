@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        src/CvxText.cpp \
         src/baseopenglwidget.cpp \
         src/main.cpp \
         src/mainwindow.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
         src/xvideothread.cpp
 
 HEADERS += \
+    inc/CvxText.h \
     inc/mainwindow.h \
     inc/baseopenglwidget.h \
     inc/xvideothread.h \
@@ -63,6 +65,8 @@ LIBS += -L$$PWD/libs/opencv411 \
 -lopencv_imgproc411 \
 -lopencv_photo411 \
 -lopencv_videoio411
+
+LIBS += -L$$PWD/libs/freetype2.10.1 -lfreetype
 
 RESOURCES += \
     res/res.qrc
