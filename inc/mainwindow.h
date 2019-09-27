@@ -34,6 +34,7 @@ private:
     bool sliderPause = false;
     bool isExporting = false;
     bool _dragging = false;
+    bool _cliped = false;
     QPoint _startPosition;
     QPoint _framePosition;
 };

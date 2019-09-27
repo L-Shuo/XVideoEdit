@@ -11,6 +11,7 @@ enum XTastType {
     TASK_ROTATE,
     TASK_FLIP,
     TASK_RESIZE,
+    TASK_CLIP,
     TASK_NONE
 };
 

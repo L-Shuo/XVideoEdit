@@ -37,6 +37,8 @@ public:
     void stopSave();
 
     ~XVideoThread();
+    cv::Size getSrcSize();
+
 
 signals:
     void setImage(cv::Mat);
@@ -59,6 +61,7 @@ protected:
     double srcFPS;
     int sleep_ms = 1;
     bool _play;
+    cv::Size srcSize;
 };
 
 #endif // XVIDEOTHREAD_H

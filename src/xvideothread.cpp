@@ -60,7 +60,7 @@ void XVideoThread::run()
             emit setMatImage(mat);
         if(vw.isOpened() && this->start_write)
         {
-            sleep_ms = 1; //加快导出速度
+            sleep_ms = 2; //加快导出速度
             vw.write(mat);
         }
         mutex.unlock();
@@ -80,6 +80,8 @@ bool XVideoThread::open(QString filename)
         return false;
     }
     srcFPS = srcVideo.get(cv::CAP_PROP_FPS);
+    srcSize.width = srcVideo.get(cv::CAP_PROP_FRAME_WIDTH);
+    srcSize.height = srcVideo.get(cv::CAP_PROP_FRAME_HEIGHT);
     sleep_ms = 1000/srcFPS;
     //qDebug() << FPS << 1000/FPS;
     if(srcFPS <= 0)
@@ -175,4 +177,9 @@ void XVideoThread::play(bool play_pause)
     qDebug() << play_pause;
     emit startPlay(play_pause);//更新播放按钮
     _play = play_pause;
+}
+
+cv::Size XVideoThread::getSrcSize()
+{
+    return srcSize;
 }

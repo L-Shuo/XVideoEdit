@@ -64,3 +64,12 @@ void XImagePro::Resize(int x, int y)
         return;
     cv::resize(dst,dst,cv::Size(x,y));
 }
+
+void XImagePro::Clip(int x, int y, int width, int height)
+{
+    if(dst.empty())
+        return;
+    cv::Size size = dst.size();
+    if(x >= 0 && y >= 0 && width < size.width && height < size.height)
+        dst = dst(cv::Rect(x,y,width,height));
+}

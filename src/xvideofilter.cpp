@@ -54,6 +54,10 @@ cv::Mat CXFilter::Filter(cv::Mat mat1, cv::Mat mat2)
             break;
         case TASK_RESIZE:
             p.Resize(task.params[0],task.params[1]);
+            break;
+        case TASK_CLIP:
+            p.Clip(task.params[0],task.params[1],task.params[2],task.params[3]);
+            break;
         }
     }
     cv::Mat ret = p.Get();

@@ -25,6 +25,9 @@ public:
     //调整图像尺寸
     void Resize(int x,int y);
 
+    //裁剪
+    void Clip(int x,int y, int width, int height);
+
     cv::Mat Get()
     {
         return dst;

@@ -72,6 +72,7 @@ void MainWindow::sliderReleased()
 
 void MainWindow::setFilter() //设置按钮触发
 {
+    _cliped = false;
     XVideoFilter::Instance()->Clear();
     if(ui->brightSpinBox->value() >= 0 && ui->contrastSpinBox->value() >= 1)
     {
@@ -86,6 +87,17 @@ void MainWindow::setFilter() //设置按钮触发
                                             ui->resize_heightEdit->text().toDouble()}});
     }
 
+    double clip_x = ui->x_spinBox->value();
+    double clip_y = ui->y_spinBox->value();
+    double clip_width = ui->w_spinBox->value();
+    double clip_height = ui->h_spinBox->value();
+    cv::Size _size = XVideoThread::Instance()->getSrcSize();
+    if(clip_x >= 0 && clip_y >= 0 && clip_width > 0
+            && clip_width < _size.width && clip_height > 0 && clip_height < _size.height)
+    {
+        _cliped = true;
+        XVideoFilter::Instance()->Add(XTask{TASK_CLIP,{clip_x,clip_y,clip_width,clip_height}});
+    }
 }
 
 void MainWindow::exportVideo()
@@ -102,6 +114,11 @@ void MainWindow::exportVideo()
         return;
     int __width = ui->resize_widthEdit->text().toInt();
     int __height = ui->resize_heightEdit->text().toInt();
+    if(_cliped)
+    {
+        __width = ui->w_spinBox->value();
+        __height = ui->h_spinBox->value();
+    }
     if(XVideoThread::Instance()->startSave(name,__width,__height)); //注意这里要传递宽高，否则导出的尺寸不对将无法播放
     {
         isExporting = true;

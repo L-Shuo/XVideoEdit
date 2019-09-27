@@ -511,8 +511,8 @@ QRadioButton::indicator:checked:pressed {
 
 /**********输入框**********/
 QLineEdit {
-        border-radius: 4px;
-        height: 25px;
+        border-radius: 2px;
+        height: 22px;
         border: 1px solid rgb(100, 100, 100);
         background: rgb(72, 72, 73);
 }
@@ -546,8 +546,8 @@ QWidget#transparentWidget {
 
 /**********微调器**********/
 QSpinBox {
-        border-radius: 4px;
-        height: 24px;
+        border-radius: 2px;
+        height: 22px;
         min-width: 40px;
         border: 1px solid rgb(100, 100, 100);
         background: rgb(68, 69, 73);
