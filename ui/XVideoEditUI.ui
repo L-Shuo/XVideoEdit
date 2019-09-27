@@ -93,14 +93,14 @@
     </item>
     <item row="4" column="2">
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="1" column="1">
+      <item row="1" column="2">
        <widget class="QPushButton" name="setButton">
         <property name="text">
          <string>设置</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="2" column="2">
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBox">
@@ -330,7 +330,7 @@ QGroupBox:title
         </item>
        </layout>
       </item>
-      <item row="2" column="2">
+      <item row="2" column="4">
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="4" column="1">
          <spacer name="verticalSpacer_3">
@@ -402,7 +402,7 @@ QGroupBox:title
 </string>
           </property>
           <property name="title">
-           <string>颜色</string>
+           <string>颜色与位置</string>
           </property>
           <layout class="QFormLayout" name="formLayout">
            <item row="1" column="1">
@@ -474,7 +474,7 @@ QGroupBox:title
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="5" column="1">
             <widget class="QSpinBox" name="fontxSpinBox">
              <property name="maximumSize">
               <size>
@@ -487,7 +487,7 @@ QGroupBox:title
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
+           <item row="6" column="1">
             <widget class="QSpinBox" name="fontySpinBox">
              <property name="maximumSize">
               <size>
@@ -500,17 +500,30 @@ QGroupBox:title
              </property>
             </widget>
            </item>
-           <item row="4" column="0">
+           <item row="5" column="0">
             <widget class="QLabel" name="label_9">
+             <property name="styleSheet">
+              <string notr="true">color:rgb(198, 243, 255)</string>
+             </property>
              <property name="text">
               <string>x</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="0">
+           <item row="6" column="0">
             <widget class="QLabel" name="label_10">
+             <property name="styleSheet">
+              <string notr="true">color:rgb(198, 243, 255)</string>
+             </property>
              <property name="text">
               <string>y</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="Line" name="line_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
@@ -523,11 +536,18 @@ QGroupBox:title
            <string notr="true">color:rgb(198, 243, 255)</string>
           </property>
           <property name="text">
-           <string>字体颜色</string>
+           <string>字体属性</string>
           </property>
          </widget>
         </item>
        </layout>
+      </item>
+      <item row="2" column="1">
+       <widget class="Line" name="line_5">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
       </item>
       <item row="2" column="0">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -669,9 +689,38 @@ QGroupBox:title
           </item>
          </widget>
         </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="font">
+           <font>
+            <family>微软雅黑</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(198, 243, 255)</string>
+          </property>
+          <property name="text">
+           <string>颜色</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QComboBox" name="videoColorBox">
+          <item>
+           <property name="text">
+            <string>RGB</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>灰度</string>
+           </property>
+          </item>
+         </widget>
+        </item>
        </layout>
       </item>
-      <item row="1" column="2">
+      <item row="1" column="4">
        <widget class="QPushButton" name="exportButton">
         <property name="text">
          <string>导出</string>
@@ -682,6 +731,13 @@ QGroupBox:title
        <widget class="QPushButton" name="openButton">
         <property name="text">
          <string>打开</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="Line" name="line_6">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
         </property>
        </widget>
       </item>

@@ -72,21 +72,30 @@ void MainWindow::sliderReleased()
 
 void MainWindow::setFilter() //设置按钮触发
 {
-    _cliped = false;
+    _cliped = false;//reset flag
+    _gray = false;
     XVideoFilter::Instance()->Clear();
+
+    /***对比度亮度调节-->***/
     if(ui->brightSpinBox->value() >= 0 && ui->contrastSpinBox->value() >= 1)
     {
         XVideoFilter::Instance()->Add(XTask{TASK_GAIN,{(double)ui->brightSpinBox->value(),ui->contrastSpinBox->value()}});
     }
-    XVideoFilter::Instance()->Add(XTask{TASK_ROTATE,{(double)ui->rotateBox->currentIndex()}});
-    XVideoFilter::Instance()->Add(XTask{TASK_FLIP,{(double)ui->flipBox->currentIndex()}});
+    /***<--对比度亮度调节***/
+
+    XVideoFilter::Instance()->Add(XTask{TASK_ROTATE,{(double)ui->rotateBox->currentIndex()}}); //旋转过滤器
+    XVideoFilter::Instance()->Add(XTask{TASK_FLIP,{(double)ui->flipBox->currentIndex()}}); //镜像过滤器
+
+    /***尺寸调整-->***/
     if(ui->resize_widthEdit->text().toDouble() >0 && ui->resize_heightEdit->text().toDouble()>0)
     {
         XVideoFilter::Instance()->Add(XTask{TASK_RESIZE,
                                             {ui->resize_widthEdit->text().toDouble(),
                                             ui->resize_heightEdit->text().toDouble()}});
     }
+    /***<--尺寸调整***/
 
+    /***裁剪过滤器-->***/
     double clip_x = ui->x_spinBox->value();
     double clip_y = ui->y_spinBox->value();
     double clip_width = ui->w_spinBox->value();
@@ -98,7 +107,9 @@ void MainWindow::setFilter() //设置按钮触发
         _cliped = true;
         XVideoFilter::Instance()->Add(XTask{TASK_CLIP,{clip_x,clip_y,clip_width,clip_height}});
     }
+    /***<--裁剪过滤器***/
 
+    /***文字水印-->***/
     if(!ui->textEdit->text().isEmpty())
     {
         int _x = ui->fontxSpinBox->value();
@@ -110,7 +121,14 @@ void MainWindow::setFilter() //设置按钮触发
         XVideoFilter::Instance()->setText(ui->textEdit->text(),QPoint(_x,_y),QColor(_r,_g,_b),_fx);
         XVideoFilter::Instance()->Add(XTask{TASK_TEXT,{}});
     }
+    /***<--文字水印***/
 
+    /***灰度-->***/
+    if(ui->videoColorBox->currentIndex() == 1)
+    {
+        _gray = true;
+    }
+    XVideoFilter::Instance()->Add(XTask{TASK_GRAY,{(double)ui->videoColorBox->currentIndex()}});
 }
 
 void MainWindow::exportVideo()
@@ -132,7 +150,7 @@ void MainWindow::exportVideo()
         __width = ui->w_spinBox->value();
         __height = ui->h_spinBox->value();
     }
-    if(XVideoThread::Instance()->startSave(name,__width,__height)); //注意这里要传递宽高，否则导出的尺寸不对将无法播放
+    if(XVideoThread::Instance()->startSave(name,__width,__height,!_gray)); //注意这里要传递宽高，否则导出的尺寸不对将无法播放
     {
         isExporting = true;
         ui->exportButton->setText(tr("停止导出"));

@@ -59,8 +59,11 @@ cv::Mat CXFilter::Filter(cv::Mat mat1, cv::Mat mat2)
         case TASK_CLIP:
             p.Clip(task.params[0],task.params[1],task.params[2],task.params[3]);
             break;
-         case TASK_TEXT:
+        case TASK_TEXT:
             p.PutText(TEXT_WRAP.p,TEXT_WRAP.text.toLocal8Bit().data(),TEXT_WRAP.color,TEXT_WRAP.font_size);
+            break;
+        case TASK_GRAY:
+            p.Gray(task.params[0]);
             break;
         }
     }

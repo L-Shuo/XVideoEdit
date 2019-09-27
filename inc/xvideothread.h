@@ -31,7 +31,7 @@ public:
     void seek(int pos);
 
     //开始保存视频
-    bool startSave(QString filename,int width, int height);
+    bool startSave(QString filename,int width, int height,bool is_color=true);
     //停止保存视频,写入视频帧的索引
     void stopSave();
 

@@ -89,3 +89,11 @@ void XImagePro::PutText(QPoint pos, const char *msg,QColor color, int fontsize=9
     _pos.y = pos.y();
     CV_TEXT.putText(dst, msg, _pos, CV_RGB(color.red(),color.green(),color.blue()));
 }
+
+void XImagePro::Gray(int gray)
+{
+    if(dst.empty())
+        return;
+    if(gray == 1)
+        cv::cvtColor(dst,dst,cv::COLOR_RGB2GRAY);
+}

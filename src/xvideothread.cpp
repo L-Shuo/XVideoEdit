@@ -130,7 +130,7 @@ XVideoThread::~XVideoThread()
     qDebug() << "~XVideoThread";
 }
 
-bool XVideoThread::startSave(QString filename,int width, int height)
+bool XVideoThread::startSave(QString filename,int width, int height,bool is_color)
 {
     qDebug() << "start saving";
     int _width = width;
@@ -145,7 +145,7 @@ bool XVideoThread::startSave(QString filename,int width, int height)
         _width = srcVideo.get(cv::CAP_PROP_FRAME_WIDTH);
     if(height == 0)
         _height = srcVideo.get(cv::CAP_PROP_FRAME_HEIGHT);
-    if(vw.open(filename.toLocal8Bit().data(),vw.fourcc('H', '2', '6', '4'),srcFPS,cv::Size(_width,_height)))
+    if(vw.open(filename.toLocal8Bit().data(),vw.fourcc('H', '2', '6', '4'),srcFPS,cv::Size(_width,_height),is_color))
     {
         srcVideo.set(cv::CAP_PROP_POS_FRAMES,0);//回到第一帧,开始导出
         this->start_write = true;

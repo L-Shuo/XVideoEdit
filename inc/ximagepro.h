@@ -34,6 +34,9 @@ public:
     //文字贴图
     void PutText(QPoint pos,const char *msg,QColor color,int fontsize);
 
+    //灰度处理
+    void Gray(int gray);
+
     cv::Mat Get()
     {
         return dst;

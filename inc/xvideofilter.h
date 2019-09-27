@@ -17,6 +17,7 @@ enum XTastType {
     TASK_RESIZE,
     TASK_CLIP,
     TASK_TEXT,
+    TASK_GRAY,
     TASK_NONE
 };
 

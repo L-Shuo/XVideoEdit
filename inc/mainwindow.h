@@ -35,6 +35,7 @@ private:
     bool isExporting = false;
     bool _dragging = false;
     bool _cliped = false;
+    bool _gray = false;
     QPoint _startPosition;
     QPoint _framePosition;
 };
