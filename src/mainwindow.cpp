@@ -98,6 +98,19 @@ void MainWindow::setFilter() //设置按钮触发
         _cliped = true;
         XVideoFilter::Instance()->Add(XTask{TASK_CLIP,{clip_x,clip_y,clip_width,clip_height}});
     }
+
+    if(!ui->textEdit->text().isEmpty())
+    {
+        int _x = ui->fontxSpinBox->value();
+        int _y = ui->fontySpinBox->value();
+        int _r = ui->r_spinBox->value();
+        int _g = ui->g_spinBox->value();
+        int _b = ui->b_spinBox->value();
+        int _fx = ui->fontsizeSpinBox->value();
+        XVideoFilter::Instance()->setText(ui->textEdit->text(),QPoint(_x,_y),QColor(_r,_g,_b),_fx);
+        XVideoFilter::Instance()->Add(XTask{TASK_TEXT,{}});
+    }
+
 }
 
 void MainWindow::exportVideo()

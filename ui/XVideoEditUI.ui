@@ -27,12 +27,76 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="0">
+     <widget class="QSlider" name="srcSlider">
+      <property name="maximumSize">
+       <size>
+        <width>800</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="maximum">
+       <number>999</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="2">
+     <widget class="BaseOpenGLWidget" name="mat_widget">
+      <property name="minimumSize">
+       <size>
+        <width>512</width>
+        <height>288</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>512</width>
+        <height>600</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="BaseOpenGLWidget" name="dst_widget">
+      <property name="minimumSize">
+       <size>
+        <width>512</width>
+        <height>288</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>512</width>
+        <height>384</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 255, 0);</string>
+      </property>
+     </widget>
+    </item>
     <item row="4" column="2">
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="1" column="0">
-       <widget class="QPushButton" name="openButton">
+      <item row="1" column="1">
+       <widget class="QPushButton" name="setButton">
         <property name="text">
-         <string>打开</string>
+         <string>设置</string>
         </property>
        </widget>
       </item>
@@ -267,17 +331,203 @@ QGroupBox:title
        </layout>
       </item>
       <item row="2" column="2">
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="4" column="1">
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSpinBox" name="fontsizeSpinBox">
+          <property name="maximum">
+           <number>9999</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="styleSheet">
+           <string notr="true">color:rgb(198, 243, 255)</string>
+          </property>
+          <property name="text">
+           <string>字体大小</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="textEdit">
+          <property name="maxLength">
+           <number>50</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="styleSheet">
+           <string notr="true">color:rgb(198, 243, 255)</string>
+          </property>
+          <property name="text">
+           <string>文字水印：</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QGroupBox" name="colorBox">
+          <property name="styleSheet">
+           <string notr="true">/*QGroupBox
+{
+  border: 1px solid white;
+  border-radius:8px;
+  margin-top:6px;
+}*/
+QGroupBox:title
+{
+  height:8;padding: 2px
+}
+</string>
+          </property>
+          <property name="title">
+           <string>颜色</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout">
+           <item row="1" column="1">
+            <widget class="QSpinBox" name="r_spinBox">
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="maximum">
+              <number>255</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="g_spinBox">
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="maximum">
+              <number>255</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QSpinBox" name="b_spinBox">
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="maximum">
+              <number>255</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_14">
+             <property name="styleSheet">
+              <string notr="true">color:rgb(198, 243, 255)</string>
+             </property>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_15">
+             <property name="styleSheet">
+              <string notr="true">color:rgb(198, 243, 255)</string>
+             </property>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_16">
+             <property name="styleSheet">
+              <string notr="true">color:rgb(198, 243, 255)</string>
+             </property>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QSpinBox" name="fontxSpinBox">
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="maximum">
+              <number>9999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QSpinBox" name="fontySpinBox">
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="maximum">
+              <number>9999</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>x</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>y</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="styleSheet">
+           <string notr="true">color:rgb(198, 243, 255)</string>
+          </property>
+          <property name="text">
+           <string>字体颜色</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item row="2" column="0">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -421,13 +671,6 @@ QGroupBox:title
         </item>
        </layout>
       </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="setButton">
-        <property name="text">
-         <string>设置</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="2">
        <widget class="QPushButton" name="exportButton">
         <property name="text">
@@ -435,10 +678,24 @@ QGroupBox:title
         </property>
        </widget>
       </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="openButton">
+        <property name="text">
+         <string>打开</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
-    <item row="1" column="2">
-     <widget class="BaseOpenGLWidget" name="mat_widget">
+    <item row="2" column="1">
+     <widget class="Line" name="line_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="BaseOpenGLWidget" name="src_widget">
       <property name="minimumSize">
        <size>
         <width>512</width>
@@ -528,77 +785,6 @@ QGroupBox:title
        </layout>
       </item>
      </layout>
-    </item>
-    <item row="2" column="0">
-     <widget class="QSlider" name="srcSlider">
-      <property name="maximumSize">
-       <size>
-        <width>800</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="maximum">
-       <number>999</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="BaseOpenGLWidget" name="dst_widget">
-      <property name="minimumSize">
-       <size>
-        <width>512</width>
-        <height>288</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>512</width>
-        <height>384</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(0, 255, 0);</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="2" column="1">
-     <widget class="Line" name="line_2">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="BaseOpenGLWidget" name="src_widget">
-      <property name="minimumSize">
-       <size>
-        <width>512</width>
-        <height>288</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>512</width>
-        <height>600</height>
-       </size>
-      </property>
-     </widget>
     </item>
     <item row="1" column="1">
      <widget class="Line" name="line">

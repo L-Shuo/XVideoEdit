@@ -2,6 +2,9 @@
 #define XIMAGEPRO_H
 
 #include <QObject>
+#include <QPoint>
+#include <QColor>
+
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc.hpp>
 
@@ -27,6 +30,9 @@ public:
 
     //裁剪
     void Clip(int x,int y, int width, int height);
+
+    //文字贴图
+    void PutText(QPoint pos,const char *msg,QColor color,int fontsize);
 
     cv::Mat Get()
     {

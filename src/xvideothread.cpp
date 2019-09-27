@@ -4,9 +4,6 @@
 
 XVideoThread::XVideoThread()
 {
-    float p = 0.5;
-    cv::Scalar font_size{ 30, 0.5, 0.5, 0 };
-    CV_TEXT.setFont(nullptr, &font_size, nullptr, &p);  //透明处理
     //CV_TEXT.putText(image, msg, cv::Point(50, 50), CV_RGB(255,255,255));
     start();
 }
@@ -51,11 +48,6 @@ void XVideoThread::run()
         if(!this->start_write)
             emit setImage(src);
         cv::Mat mat = XVideoFilter::Instance()->Filter(src,/*unused*/cv::Mat());
-        //贴图文字Test--->
-        //QString text("你好");
-        //const char *msg = text.toLocal8Bit().data();
-        //CV_TEXT.putText(mat, msg, cv::Point(50, 50), CV_RGB(255,0,0));
-        //<---贴图文字
         if(!this->start_write)
             emit setMatImage(mat);
         if(vw.isOpened() && this->start_write)

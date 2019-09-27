@@ -1,5 +1,8 @@
 #include "ximagepro.h"
+#include "CvxText.h"
 #include <QDebug>
+
+static CvxText CV_TEXT("F:\\Code\\XVideoEdit\\XVideoEdit\\res\\simhei.ttf");
 
 XImagePro::XImagePro()
 {
@@ -72,4 +75,17 @@ void XImagePro::Clip(int x, int y, int width, int height)
     cv::Size size = dst.size();
     if(x >= 0 && y >= 0 && width < size.width && height < size.height)
         dst = dst(cv::Rect(x,y,width,height));
+}
+
+void XImagePro::PutText(QPoint pos, const char *msg,QColor color, int fontsize=9)
+{
+    if(dst.empty())
+        return;
+    float p = 0.5;
+    cv::Scalar font_size{ (double)fontsize, 0.5, 0.5, 0 };
+    CV_TEXT.setFont(nullptr, &font_size, nullptr, &p);  //透明处理
+    cv::Point _pos;
+    _pos.x = pos.x();
+    _pos.y = pos.y();
+    CV_TEXT.putText(dst, msg, _pos, CV_RGB(color.red(),color.green(),color.blue()));
 }
