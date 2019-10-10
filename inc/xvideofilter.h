@@ -18,6 +18,7 @@ enum XTastType {
     TASK_CLIP,
     TASK_TEXT,
     TASK_GRAY,
+    TASK_MASK,
     TASK_NONE
 };
 
@@ -44,12 +45,14 @@ public:
     static XVideoFilter *Instance();
     void setText(QString str,QPoint pos,QColor color, int font_size);
 
-    virtual cv::Mat Filter(cv::Mat mat1, cv::Mat mat2) = 0;
+    virtual cv::Mat Filter(cv::Mat mat1, cv::Mat mat2, cv::Mat *mask) = 0;
     virtual void Add(XTask task) = 0;
     virtual void Clear() = 0;
 
     virtual ~XVideoFilter(); //虚析构函数，保证继承类的析构函数被调用
 
+private:
+    bool isMask;
 };
 
 #endif // XVIDEOFILTER_H

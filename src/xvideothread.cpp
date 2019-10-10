@@ -47,7 +47,7 @@ void XVideoThread::run()
         }
         if(!this->start_write)
             emit setImage(src);
-        cv::Mat mat = XVideoFilter::Instance()->Filter(src,/*unused*/cv::Mat());
+        cv::Mat mat = XVideoFilter::Instance()->Filter(src,/*unused*/cv::Mat(),&Mask);
         if(!this->start_write)
             emit setMatImage(mat);
         if(vw.isOpened() && this->start_write)
@@ -174,4 +174,11 @@ void XVideoThread::play(bool play_pause)
 cv::Size XVideoThread::getSrcSize()
 {
     return srcSize;
+}
+
+void XVideoThread::setMask(QString filename)
+{
+    mutex.lock();
+    Mask = cv::imread(filename.toLocal8Bit().data());
+    mutex.unlock();
 }

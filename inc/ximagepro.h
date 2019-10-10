@@ -13,7 +13,7 @@ class XImagePro
 public:
     XImagePro();
     //设置转换源
-    void Set(cv::Mat src1, cv::Mat src2);
+    void Set(cv::Mat src1, cv::Mat src2, cv::Mat *mask);
 
     //设置亮度与对比度
     void Gain(double bright, double contrast);
@@ -37,6 +37,9 @@ public:
     //灰度处理
     void Gray(int gray);
 
+    //图片水印
+    void Mask(int x,int y,double opacity);
+
     cv::Mat Get()
     {
         return dst;
@@ -44,7 +47,7 @@ public:
 
 private:
     cv::Mat dst;
-    cv::Mat src1,src2;
+    cv::Mat src1,src2,*mask;
 };
 
 #endif // XIMAGEPRO_H

@@ -8,7 +8,7 @@
 class CXFilter : public XVideoFilter
 {
 public:
-    cv::Mat Filter(cv::Mat mat1, cv::Mat mat2);
+    cv::Mat Filter(cv::Mat mat1, cv::Mat mat2, cv::Mat *mask);
     ~CXFilter()
     {
         Clear();
@@ -32,11 +32,11 @@ private:
     QVector<XTask> tasks;
 };
 
-cv::Mat CXFilter::Filter(cv::Mat mat1, cv::Mat mat2)
+cv::Mat CXFilter::Filter(cv::Mat mat1, cv::Mat mat2, cv::Mat *mask)
 {
     mutex.lock();
     XImagePro p;
-    p.Set(mat1,mat2);
+    p.Set(mat1,mat2,mask);
     for(auto &task:tasks)
     {
         switch(task.x_type)
@@ -64,6 +64,9 @@ cv::Mat CXFilter::Filter(cv::Mat mat1, cv::Mat mat2)
             break;
         case TASK_GRAY:
             p.Gray(task.params[0]);
+            break;
+        case TASK_MASK:
+            p.Mask(task.params[0],task.params[1],task.params[2]);
             break;
         }
     }

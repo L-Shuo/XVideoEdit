@@ -37,8 +37,6 @@ void MainWindow::Open()
     {
         return;
     }
-    //char* file = filename.toLocal8Bit().data();
-    //QMessageBox::information(this,"",filename);
     if(!XVideoThread::Instance()->open(filename))
     {
         QMessageBox::information(this,"","open failed!" + filename);
@@ -129,6 +127,11 @@ void MainWindow::setFilter() //设置按钮触发
         _gray = true;
     }
     XVideoFilter::Instance()->Add(XTask{TASK_GRAY,{(double)ui->videoColorBox->currentIndex()}});
+    /***<--灰度***/
+
+    /***图片水印-->***/
+    XVideoFilter::Instance()->Add(XTask{TASK_MASK,{(double)ui->maskX->value(),(double)ui->maskY->value(),ui->maskAlpha->value()}});
+    /***<--图片水印***/
 }
 
 void MainWindow::exportVideo()
@@ -150,7 +153,7 @@ void MainWindow::exportVideo()
         __width = ui->w_spinBox->value();
         __height = ui->h_spinBox->value();
     }
-    if(XVideoThread::Instance()->startSave(name,__width,__height,!_gray)); //注意这里要传递宽高，否则导出的尺寸不对将无法播放
+    if(XVideoThread::Instance()->startSave(name,__width,__height,!_gray)) //注意这里要传递宽高，否则导出的尺寸不对将无法播放
     {
         isExporting = true;
         ui->exportButton->setText(tr("停止导出"));
@@ -193,4 +196,14 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 {
     _dragging = false;
     QWidget::mouseReleaseEvent(event);
+}
+
+void MainWindow::setMask()
+{
+    qDebug() << "setMask";
+    QString name = QFileDialog::getOpenFileName(this,
+                                                QString::fromLocal8Bit("请选择水印图片："), "", tr("Image Files (*.png *.jpg *.bmp)"));
+    if(name.isEmpty())
+        return;
+    XVideoThread::Instance()->setMask(name);
 }

@@ -12,6 +12,7 @@
 
 static cv::VideoCapture srcVideo;
 static cv::VideoWriter vw;
+//static cv::Mat Mask;
 
 class XVideoThread : public QThread
 {
@@ -34,6 +35,9 @@ public:
     bool startSave(QString filename,int width, int height,bool is_color=true);
     //停止保存视频,写入视频帧的索引
     void stopSave();
+
+    //设置图片水印
+    void setMask(QString filename);
 
     ~XVideoThread();
     cv::Size getSrcSize();
@@ -61,6 +65,7 @@ protected:
     int sleep_ms = 1;
     bool _play;
     cv::Size srcSize;
+    cv::Mat Mask;
 };
 
 #endif // XVIDEOTHREAD_H

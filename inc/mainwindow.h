@@ -28,6 +28,7 @@ private slots:
     void setFilter();
     void exportVideo(); //导出视频
     void exportStopped();
+    void setMask();
 
 private:
     Ui::MainWindow *ui;
