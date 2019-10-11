@@ -11,6 +11,8 @@
 #include "CvxText.h"
 
 static cv::VideoCapture srcVideo;
+static cv::VideoCapture srcBlend;
+
 static cv::VideoWriter vw;
 //static cv::Mat Mask;
 
@@ -26,6 +28,7 @@ public:
     }
     void run();
     bool open(QString filename);
+    bool openBlend(QString filename);
     double getPlayPos();
 
     //外部设置帧位置的接口
@@ -39,6 +42,8 @@ public:
     //设置图片水印
     void setMask(QString filename);
 
+    void startBlend(bool start);
+
     ~XVideoThread();
     cv::Size getSrcSize();
 
@@ -46,6 +51,7 @@ public:
 signals:
     void setImage(cv::Mat);
     void setMatImage(cv::Mat);
+    void setBlendImage(cv::Mat);
     void exportStopped();
     void startPlay(bool);
 
@@ -64,6 +70,7 @@ protected:
     double srcFPS;
     int sleep_ms = 1;
     bool _play;
+    volatile bool _needBlend = false;
     cv::Size srcSize;
     cv::Mat Mask;
 };

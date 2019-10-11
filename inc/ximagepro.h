@@ -40,6 +40,9 @@ public:
     //图片水印
     void Mask(int x,int y,double opacity);
 
+    //视频融合
+    void Blend(double alpha);
+
     cv::Mat Get()
     {
         return dst;

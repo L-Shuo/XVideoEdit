@@ -19,6 +19,7 @@ enum XTastType {
     TASK_TEXT,
     TASK_GRAY,
     TASK_MASK,
+    TASK_BLEND,
     TASK_NONE
 };
 

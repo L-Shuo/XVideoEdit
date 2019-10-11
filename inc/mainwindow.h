@@ -29,6 +29,8 @@ private slots:
     void exportVideo(); //导出视频
     void exportStopped();
     void setMask();
+    void openBlendVideo();
+    void startBlend();
 
 private:
     Ui::MainWindow *ui;
@@ -37,6 +39,7 @@ private:
     bool _dragging = false;
     bool _cliped = false;
     bool _gray = false;
+    bool _blend = false;
     QPoint _startPosition;
     QPoint _framePosition;
 };

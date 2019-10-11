@@ -68,6 +68,11 @@ cv::Mat CXFilter::Filter(cv::Mat mat1, cv::Mat mat2, cv::Mat *mask)
         case TASK_MASK:
             p.Mask(task.params[0],task.params[1],task.params[2]);
             break;
+        case TASK_BLEND:
+            p.Blend(task.params[0]);
+            break;
+        default:
+            break;
         }
     }
     cv::Mat ret = p.Get();

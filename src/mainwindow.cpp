@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qRegisterMetaType<cv::Mat>("cv::Mat");
     connect(XVideoThread::Instance(),SIGNAL(setImage(cv::Mat)),ui->src_widget,SLOT(updateImage(cv::Mat)));
     connect(XVideoThread::Instance(),SIGNAL(setMatImage(cv::Mat)),ui->mat_widget,SLOT(updateImage(cv::Mat)));
+    connect(XVideoThread::Instance(),SIGNAL(setBlendImage(cv::Mat)),ui->dst_widget,SLOT(updateImage(cv::Mat)));
     connect(XVideoThread::Instance(),SIGNAL(exportStopped()),this,SLOT(exportStopped()));
     connect(XVideoThread::Instance(),SIGNAL(startPlay(bool)),ui->src_widget,SLOT(pause_play(bool)));
     connect(ui->src_widget,SIGNAL(play_pause(bool)),XVideoThread::Instance(),SLOT(play(bool)));
@@ -132,6 +133,10 @@ void MainWindow::setFilter() //设置按钮触发
     /***图片水印-->***/
     XVideoFilter::Instance()->Add(XTask{TASK_MASK,{(double)ui->maskX->value(),(double)ui->maskY->value(),ui->maskAlpha->value()}});
     /***<--图片水印***/
+
+    /***视频融合-->***/
+    XVideoFilter::Instance()->Add(XTask{TASK_BLEND,{ui->blendAlpha->value()}});
+    /***<--视频融合***/
 }
 
 void MainWindow::exportVideo()
@@ -206,4 +211,31 @@ void MainWindow::setMask()
     if(name.isEmpty())
         return;
     XVideoThread::Instance()->setMask(name);
+}
+
+void MainWindow::openBlendVideo()
+{
+    qDebug() << "openBlendVideo()";
+    QString filename = QFileDialog::getOpenFileName(this,QString::fromLocal8Bit("选择合并视频文件："));
+    if(filename.isEmpty())
+    {
+        return;
+    }
+    if(!XVideoThread::Instance()->openBlend(filename))
+    {
+        QMessageBox::information(this,"","open failed!" + filename);
+    }
+}
+
+void MainWindow::startBlend()
+{
+    XVideoThread::Instance()->startBlend(!_blend);
+    if(!_blend)
+    {
+        _blend = true;
+    }
+    else
+    {
+        _blend = false;
+    }
 }

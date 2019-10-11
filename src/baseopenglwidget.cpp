@@ -38,7 +38,7 @@ void BaseOpenGLWidget::pause_play(bool play) //接受来自XVideoThread的事件
     if(play)
     {
         btn_show = true; //允许按钮显示
-        qDebug() << "###play";
+        //qDebug() << "###play";
         //emit play_pause(true);//发出播放信号
         pause = false;
         play_pause_btn->setIcon(QIcon(":/style/pause.png"));
@@ -46,7 +46,7 @@ void BaseOpenGLWidget::pause_play(bool play) //接受来自XVideoThread的事件
     }
     if(!play)
     {
-        qDebug() << "###pause";
+        //qDebug() << "###pause";
         //emit play_pause(false);//发出暂停信号
         play_pause_btn->setIcon(QIcon(":/style/play.png"));
         pause = true;
@@ -90,6 +90,8 @@ void BaseOpenGLWidget::mouseMoveEvent(QMouseEvent *event)
 
 void BaseOpenGLWidget::updateImage(cv::Mat image)
 {
+    if(image.empty())
+        return;
     if(img.isNull())
     {
         //qDebug() << "create image";

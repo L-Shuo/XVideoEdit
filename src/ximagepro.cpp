@@ -118,3 +118,14 @@ void XImagePro::Mask(int x, int y, double opacity)
     cv::Mat roi = dst(cv::Rect(x,y,mask->cols,mask->rows));
     cv::addWeighted(*mask,opacity,roi,1-opacity,0,roi);
 }
+
+void XImagePro::Blend(double alpha)
+{
+    if(dst.empty() || this->src1.empty() || this->src2.empty())
+        return;
+    if(this->src1.size() != this->src2.size())
+    {
+        cv::resize(src2,src2,dst.size());
+    }
+    cv::addWeighted(this->src1,alpha,this->src2,1-alpha,0,dst);
+}

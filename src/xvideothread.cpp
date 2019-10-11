@@ -11,6 +11,8 @@ XVideoThread::XVideoThread()
 void XVideoThread::run()
 {
     cv::Mat src;
+    cv::Mat blend;
+    cv::Mat mat;
 
     for(;;)
     {
@@ -32,6 +34,13 @@ void XVideoThread::run()
             msleep(5);
             continue;
         }
+        if(srcBlend.isOpened())
+        {
+            if(!this->start_write && srcBlend.read(blend) && !blend.empty())
+                emit setBlendImage(blend);
+            if(this->start_write)
+                srcBlend.read(blend);
+        }
         if(!srcVideo.read(src) || src.empty())
         {
             if(this->start_write)
@@ -47,9 +56,23 @@ void XVideoThread::run()
         }
         if(!this->start_write)
             emit setImage(src);
-        cv::Mat mat = XVideoFilter::Instance()->Filter(src,/*unused*/cv::Mat(),&Mask);
+
+        if(this->_needBlend)
+        {
+            //qDebug() << "_needBlend";
+            mat = XVideoFilter::Instance()->Filter(src,blend,&Mask);
+        }
+        else
+        {
+            //qDebug() << "not _needBlend";
+            mat = XVideoFilter::Instance()->Filter(src,cv::Mat(),&Mask);
+        }
+
         if(!this->start_write)
+        {
             emit setMatImage(mat);
+        }
+
         if(vw.isOpened() && this->start_write)
         {
             sleep_ms = 2; //加快导出速度
@@ -80,8 +103,31 @@ bool XVideoThread::open(QString filename)
     {
         srcFPS = 30;
     }
-     _play = true;
-     emit startPlay(_play);//更新播放按钮
+    _play = true;
+    emit startPlay(_play);//更新播放按钮
+    return true;
+}
+
+bool XVideoThread::openBlend(QString filename)
+{
+    qDebug() << "openBlend" << filename.toLocal8Bit().data();
+    if(srcBlend.isOpened())
+    {
+        srcBlend.release();
+    }
+    if(!srcBlend.open(filename.toLocal8Bit().data()))
+    {
+        return false;
+    }
+    srcFPS = srcBlend.get(cv::CAP_PROP_FPS);
+    srcSize.width = srcBlend.get(cv::CAP_PROP_FRAME_WIDTH);
+    srcSize.height = srcBlend.get(cv::CAP_PROP_FRAME_HEIGHT);
+    sleep_ms = 1000/srcFPS;
+    //qDebug() << FPS << 1000/FPS;
+    if(srcFPS <= 0)
+    {
+        srcFPS = 30;
+    }
     return true;
 }
 
@@ -180,5 +226,12 @@ void XVideoThread::setMask(QString filename)
 {
     mutex.lock();
     Mask = cv::imread(filename.toLocal8Bit().data());
+    mutex.unlock();
+}
+
+void XVideoThread::startBlend(bool start)
+{
+    mutex.lock();
+    _needBlend = start;
     mutex.unlock();
 }
