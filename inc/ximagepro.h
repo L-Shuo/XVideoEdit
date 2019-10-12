@@ -43,6 +43,9 @@ public:
     //视频融合
     void Blend(double alpha);
 
+    //视频合并
+    void Merge();
+
     cv::Mat Get()
     {
         return dst;

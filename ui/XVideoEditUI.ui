@@ -758,7 +758,7 @@ QGroupBox:title
        </widget>
       </item>
       <item row="2" column="4">
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="btnMerge">
         <property name="text">
          <string>合并视频</string>
         </property>
@@ -1140,6 +1140,22 @@ QGroupBox:title
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnMerge</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>startMerge()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>938</x>
+     <y>419</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>912</x>
+     <y>672</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>Open()</slot>
@@ -1151,5 +1167,6 @@ QGroupBox:title
   <slot>setMask()</slot>
   <slot>openBlendVideo()</slot>
   <slot>startBlend()</slot>
+  <slot>startMerge()</slot>
  </slots>
 </ui>

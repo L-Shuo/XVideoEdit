@@ -31,6 +31,7 @@ private slots:
     void setMask();
     void openBlendVideo();
     void startBlend();
+    void startMerge();
 
 private:
     Ui::MainWindow *ui;
@@ -40,6 +41,8 @@ private:
     bool _cliped = false;
     bool _gray = false;
     bool _blend = false;
+    bool _merge = false;
+    bool _blendVideoOpened = false;
     QPoint _startPosition;
     QPoint _framePosition;
 };

@@ -46,6 +46,7 @@ public:
 
     ~XVideoThread();
     cv::Size getSrcSize();
+    cv::Size getSrc2Size();
 
 
 signals:
@@ -71,7 +72,7 @@ protected:
     int sleep_ms = 1;
     bool _play;
     volatile bool _needBlend = false;
-    cv::Size srcSize;
+    cv::Size srcSize,src2Size;
     cv::Mat Mask;
 };
 

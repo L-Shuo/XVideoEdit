@@ -129,3 +129,22 @@ void XImagePro::Blend(double alpha)
     }
     cv::addWeighted(this->src1,alpha,this->src2,1-alpha,0,dst);
 }
+
+void XImagePro::Merge()
+{
+    if(this->src1.empty() || this->src2.empty())
+        return;
+    if(src1.rows != src2.rows)
+    {
+        //int w = src2.cols * ((double)src2.rows/(double)dst.rows);
+        //cv::resize(src2,src2,cv::Size(w,dst.rows));
+        cv::resize(src2,src2,cv::Size(src1.rows*((double)src2.cols/(double)src2.rows),src1.rows));
+    }
+    int dw = src1.cols + src2.cols;
+    int dh = src1.rows;
+    dst = cv::Mat(cv::Size(dw,dh),src1.type());
+    cv::Mat r1 = dst(cv::Rect(0,0,src1.cols,src1.rows));
+    cv::Mat r2 = dst(cv::Rect(src1.cols,0,src2.cols,dh));
+    src1.copyTo(r1);
+    src2.copyTo(r2);
+}

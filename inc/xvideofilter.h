@@ -20,6 +20,7 @@ enum XTastType {
     TASK_GRAY,
     TASK_MASK,
     TASK_BLEND,
+    TASK_MERGE,
     TASK_NONE
 };
 

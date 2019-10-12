@@ -57,16 +57,16 @@ void XVideoThread::run()
         if(!this->start_write)
             emit setImage(src);
 
-        if(this->_needBlend)
-        {
-            //qDebug() << "_needBlend";
-            mat = XVideoFilter::Instance()->Filter(src,blend,&Mask);
-        }
-        else
-        {
-            //qDebug() << "not _needBlend";
-            mat = XVideoFilter::Instance()->Filter(src,cv::Mat(),&Mask);
-        }
+//        if(this->_needBlend)
+//        {
+//            //qDebug() << "_needBlend";
+//            mat = XVideoFilter::Instance()->Filter(src,blend,&Mask);
+//        }
+//        else
+//        {
+//            //qDebug() << "not _needBlend";
+        mat = XVideoFilter::Instance()->Filter(src,blend,&Mask);
+        //}
 
         if(!this->start_write)
         {
@@ -120,8 +120,8 @@ bool XVideoThread::openBlend(QString filename)
         return false;
     }
     srcFPS = srcBlend.get(cv::CAP_PROP_FPS);
-    srcSize.width = srcBlend.get(cv::CAP_PROP_FRAME_WIDTH);
-    srcSize.height = srcBlend.get(cv::CAP_PROP_FRAME_HEIGHT);
+    src2Size.width = srcBlend.get(cv::CAP_PROP_FRAME_WIDTH);
+    src2Size.height = srcBlend.get(cv::CAP_PROP_FRAME_HEIGHT);
     sleep_ms = 1000/srcFPS;
     //qDebug() << FPS << 1000/FPS;
     if(srcFPS <= 0)
@@ -220,6 +220,11 @@ void XVideoThread::play(bool play_pause)
 cv::Size XVideoThread::getSrcSize()
 {
     return srcSize;
+}
+
+cv::Size XVideoThread::getSrc2Size()
+{
+    return src2Size;
 }
 
 void XVideoThread::setMask(QString filename)

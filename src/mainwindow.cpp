@@ -135,8 +135,19 @@ void MainWindow::setFilter() //设置按钮触发
     /***<--图片水印***/
 
     /***视频融合-->***/
-    XVideoFilter::Instance()->Add(XTask{TASK_BLEND,{ui->blendAlpha->value()}});
+    if(_blend)
+    {
+        qDebug() << "filter blend";
+        XVideoFilter::Instance()->Add(XTask{TASK_BLEND,{ui->blendAlpha->value()}});
+    }
     /***<--视频融合***/
+
+    /***视频合并-->***/
+    if(_merge)
+    {
+        XVideoFilter::Instance()->Add(XTask{TASK_MERGE,{}});
+    }
+    /***<--视频合并***/
 }
 
 void MainWindow::exportVideo()
@@ -157,6 +168,14 @@ void MainWindow::exportVideo()
     {
         __width = ui->w_spinBox->value();
         __height = ui->h_spinBox->value();
+    }
+    if(_merge)
+    {
+        cv::Size src1 = XVideoThread::Instance()->getSrcSize();
+        cv::Size src2 = XVideoThread::Instance()->getSrc2Size();
+        __height = src1.height;
+        //src1.rows*((double)src2.cols/(double)src2.rows)
+        __width = src1.height*((double)src2.width/(double)src2.height) + src1.width;
     }
     if(XVideoThread::Instance()->startSave(name,__width,__height,!_gray)) //注意这里要传递宽高，否则导出的尺寸不对将无法播放
     {
@@ -225,17 +244,42 @@ void MainWindow::openBlendVideo()
     {
         QMessageBox::information(this,"","open failed!" + filename);
     }
+    _blendVideoOpened = true;
 }
 
 void MainWindow::startBlend()
 {
-    XVideoThread::Instance()->startBlend(!_blend);
+    //XVideoThread::Instance()->startBlend(!_blend);
+    if(!_blendVideoOpened)
+        return;
     if(!_blend)
     {
         _blend = true;
+        ui->btnBlend->setText(tr("融合中"));
+        _merge = false;
+        ui->btnMerge->setText(tr("合并视频"));
     }
     else
     {
         _blend = false;
+        ui->btnBlend->setText(tr("视频融合"));
+    }
+}
+
+void MainWindow::startMerge()
+{
+    if(!_blendVideoOpened)
+        return;
+    if(!_merge)
+    {
+        _merge = true;
+        ui->btnMerge->setText(tr("合并中"));
+        _blend = false;
+        ui->btnBlend->setText(tr("视频融合"));
+    }
+    else
+    {
+        _merge = false;
+        ui->btnMerge->setText(tr("合并视频"));
     }
 }

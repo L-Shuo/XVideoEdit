@@ -4,6 +4,7 @@
 #include <QFile>
 #include "CvxText.h"
 
+/*
 //中文字体格式转换
 static int ToWchar(const char* &src, wchar_t* &dest, const char *locale = "zh_CN.utf8")
 {
@@ -35,6 +36,7 @@ static int ToWchar(const char* &src, wchar_t* &dest, const char *locale = "zh_CN
     }
     return 0;
 }
+*/
 
 int main(int argc, char *argv[])
 {

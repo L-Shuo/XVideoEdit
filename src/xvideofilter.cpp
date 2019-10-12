@@ -71,6 +71,9 @@ cv::Mat CXFilter::Filter(cv::Mat mat1, cv::Mat mat2, cv::Mat *mask)
         case TASK_BLEND:
             p.Blend(task.params[0]);
             break;
+        case TASK_MERGE:
+            p.Merge();
+            break;
         default:
             break;
         }
